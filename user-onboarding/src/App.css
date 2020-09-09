@@ -1,30 +1,27 @@
+/* @import url(`https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap`); */
+html{
+  /* background: #5F9EA0; */
+  background-image: url("form-app.jpg");
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 62.5%;
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-size: 170%;
+  
+}
+header{
+  font-size: 200%;
+  padding: 2rem;
+  color: #DC143C;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -35,4 +32,77 @@
   to {
     transform: rotate(360deg);
   }
+} */
+label{
+  padding: 0.5rem;
+}
+form{
+  margin: 5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #008B8B;
+  background: #FFF8DC;
+  box-shadow: inset 0 0 10px #008B8B;
+}
+/* #checkbox-label{
+  
+} */
+#checkbox{
+  align-self: flex-end;
+  border: 2px solid #008B8B;
+  /* color: #008B8B */
+  height: inherit;
+}
+input, textarea{
+  border-radius: 9px;
+  width: 50%;
+  height: 3rem;
+  border: 2px solid #008B8B;
+}
+input:focus{
+  background: #FFE4C4;
+}
+textarea:focus{
+  background: #FFE4C4;
+}
+button{
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 90%;
+  padding: 0.3rem;
+  width: 30%;
+  height: 3.5rem;
+  border: 1px solid #008B8B;
+  background: #5F9EA0;
+  color: white;
+  /* box-shadow: inset 0 0 10px #000000; */
+  box-shadow: 0 8px 6px -6px black;
+}
+button:hover{
+  background: white;
+  color: black;
+}
+button:disabled {
+  background-image: none;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+p {
+  font-size: 1.2rem;
+  color: red;
+}
+select{
+  letter-spacing: 1.5px;
+  padding: 1rem;
+  background: #5F9EA0;
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 9px;
+  font-size: 100%;
 }
