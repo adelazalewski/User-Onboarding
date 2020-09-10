@@ -5,7 +5,10 @@ import * as yup from 'yup';
 //schema for validation
 const formSchema = yup.object().shape({
     name: yup.string().required("Name is a required field"),
-    email: yup.string().email("Must be a valid email address").required("Must include email address"),
+    email: yup.string().email("Must be a valid email address")
+    .required("Must include email address").notOneOf([('waffles@syrup.com', 'pancakes@blueberries.com'), null], "This email is already taken."),
+    // email: yup.array().of(['waffles@syrup.com']).unique("This email is already taken."),
+    
     password: yup.string()
         .required("Must set a password")
         .min(8 ,"Password should be 8 characters long")
@@ -84,11 +87,11 @@ export default function Form () {
          .then((res) => {
             console.log(res);
             setUsers(res.data);
-            //console.log(users);
+           
          })
          .catch((err) => console.log(err));
     };
-
+ console.log(users);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     useEffect(() => {
         formSchema.isValid(formState).then((valid) => {
@@ -97,6 +100,7 @@ export default function Form () {
     }, [formState]);
 
     return (
+        <>
         <form onSubmit={submitForm}>
             <label htmlFor="name">Full Name</label>
             <input type="text" name="name" value={formState.name} onChange={inputChangeHandler}/>
@@ -138,5 +142,7 @@ export default function Form () {
 
             <button disabled={buttonDisabled} type="submit">Submit</button>
         </form>
+        <pre>{JSON.stringify(users, null, 2)}</pre>
+        </>
     )
 }
