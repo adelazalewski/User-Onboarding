@@ -7,12 +7,10 @@ const formSchema = yup.object().shape({
     name: yup.string().required("Name is a required field"),
     email: yup.string().email("Must be a valid email address")
     .required("Must include email address").notOneOf([('waffles@syrup.com', 'pancakes@blueberries.com'), null], "This email is already taken."),
-    // email: yup.array().of(['waffles@syrup.com']).unique("This email is already taken."),
-    
     password: yup.string()
         .required("Must set a password")
         .min(8 ,"Password should be 8 characters long")
-        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/, "Password must 4 to 8 characters long and have one uppercase, one lowercase and one numeric digit"),
+        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/, "Password must be 4 to 8 characters long and have one uppercase, one lowercase and one numeric digit"),
     confirmPassword: yup.string().oneOf([yup.ref('password') , null], "Password must match"),
     house: yup.string().required("Must choose a house for team building activities"),
     description: yup.string().required("We would like to get to know you as soon as possible :)"),
@@ -91,7 +89,7 @@ export default function Form () {
          })
          .catch((err) => console.log(err));
     };
- console.log(users);
+ //console.log(users);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     useEffect(() => {
         formSchema.isValid(formState).then((valid) => {
@@ -102,7 +100,9 @@ export default function Form () {
     return (
         <>
         <form onSubmit={submitForm}>
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">Full Name
+            {errorState.name.length > 0 ? <p>{errorState.name}</p> : null}
+            </label>
             <input type="text" name="name" value={formState.name} onChange={inputChangeHandler}/>
 
             <label htmlFor="email">Your email
@@ -121,9 +121,9 @@ export default function Form () {
             <input type="password" name="confirmPassword" value={formState.confirmPassword} onChange={inputChangeHandler}/>
 
             <label htmlFor="house">Choose Your House ( ͡• ͜ʖ ͡•)
-            {errorState.house.length > 0 ? <p>{errorState.house}</p> : null}
+            <p>{errorState.house}</p>
             </label>
-            <select name="house" value={formState.house} onChange={inputChangeHandler}>
+            <select data-cy="dropdown" name="house" value={formState.house} onChange={inputChangeHandler}>
                 <option value="gryffindor">Gryffindor</option>
                 <option value="ravenclaw">Ravenclaw</option>
                 <option value="hufflepuff">Hufflepuff</option>
@@ -131,9 +131,9 @@ export default function Form () {
             </select>
 
             <label htmlFor="description">Tell us about yourself
-            {errorState.description.length > 0 ? <p>{errorState.description}</p> : null}
+            {errorState.description.length > 0 ? <p data-cy="description error">{errorState.description}</p> : null}
             </label>
-            <textarea name="description" value={formState.description} onChange={inputChangeHandler}/>
+            <textarea data-cy="description" name="description" value={formState.description} onChange={inputChangeHandler}/>
 
             <label htmlFor="terms" id="checkbox-label">Terms and Conditions
             {errorState.terms.length > 0 ? <p>{errorState.terms}</p> : null}
